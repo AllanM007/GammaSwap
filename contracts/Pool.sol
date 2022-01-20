@@ -82,7 +82,7 @@ contract PoolBank {
             address recipient = stakers[i];
             uint balance = stakingBalance[recipient];
             
-    // if there is a balance transfer the SAME amount of bank tokens to the account that is staking as a reward
+            // if there is a balance transfer the SAME amount of bank tokens to the account that is staking as a reward
             
             if(balance >0 ) {
                 IERC20(GammaToken).transfer(recipient, balance);
