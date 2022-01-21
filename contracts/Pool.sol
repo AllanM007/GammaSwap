@@ -41,7 +41,7 @@ contract PoolBank {
     // allow user to stake usdc tokens in contract
     function stakeTokens(uint _amount) public {
 
-        // Trasnfer usdc tokens to contract for staking
+        // Transfer usdc tokens to contract for staking
         IERC20(usdc).transferFrom(msg.sender, address(this), _amount);
 
         // Update the staking balance in map
@@ -55,6 +55,24 @@ contract PoolBank {
         // Update staking status to track
         isStaking[msg.sender] = true;
         hasStaked[msg.sender] = true;
+    }
+
+    function withdrawTokens(uint _amount) public {
+
+    	// get the users staking balance in usdc
+    	uint balance = stakingBalance[msg.sender];
+
+        //deduct amount of tokens from staking balance
+        uint new_staking_balance = balance - _amount;
+
+        // require the amount being withdrawn must be less than the staking balance
+        require(balance > new_staking_balance, "Insufficient token balance!");
+
+        // transfer usdc tokens out of this contract to the msg.sender
+        IERC20(usdc).transfer(msg.sender, _amount);
+    
+        // reset staking balance map to new balance
+        stakingBalance[msg.sender] = balance;
     }
 
     function unstakeTokens() public {
