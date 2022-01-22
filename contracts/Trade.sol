@@ -2,6 +2,12 @@
 
 pragma solidity ^0.8.0;
 
-interface IERC20 {}
+import "./Pool.sol";
 
-contract TokenSwap {}
+// interface IERC20 {}
+
+contract TokenSwap {
+    constructor () {
+
+    }
+}
