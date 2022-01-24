@@ -12,6 +12,9 @@ contract TokenSwap {
     IERC20 public token2;
     address public trader1;
     address public trader2;
+
+    event Bought(uint256 amount);
+    event Sold(uint256 amount);
     
     //when deploying pass in owner 1 and owner 2
 
@@ -27,5 +30,23 @@ contract TokenSwap {
         token2 = IERC20(_token2);
     }
 
-    function swap(uint _amount1, uint amount2) public {}
+    function buy(uint _amount) payable public {
+        require(_amount > 0, "Token amount can't be less than 0");
+        require(msg.sender.balance < _amount, "Insufficient balance");
+
+        token1.transfer(msg.sender, _amount);
+        emit Bought(_amount);
+
+        uint256 dexBalance = token1.balanceOf(address(this));
+    }
+
+    function sell(uint _amount) payable public {
+        require(_amount > 0, "Amount can't be 0");
+        require(msg.sender.balance > _amount);
+
+        token2.transfer(address(this), _amount);
+        emit Sold(_amount);
+
+        uint256 dexBalance = token2.balanceOf(address(this));
+    }
 }
