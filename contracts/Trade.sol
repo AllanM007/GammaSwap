@@ -32,7 +32,7 @@ contract TokenSwap {
 
     function buy(uint _amount) payable public {
         require(_amount > 0, "Token amount can't be less than 0");
-        require(msg.sender.balance < _amount, "Insufficient balance");
+        require(address(this).balance > _amount, "Insufficient token balance in pool");
 
         token1.transfer(msg.sender, _amount);
         emit Bought(_amount);
