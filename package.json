@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@openzeppelin/contracts": "^4.4.2",
-    "dotenv": "^14.2.0"
+    "dotenv": "^14.2.0",
+    "webpack": "^5.67.0"
   }
 }
