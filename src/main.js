@@ -1,3 +1,5 @@
+console.log("Tebere");
+
 const Web3 = require('web3');
 const rpcURL = require('');
 const GammaTokenAbi = require('artifacts/contracts/Token.sol/GammaToken.json');
