@@ -1,10 +1,10 @@
 console.log("Tebere");
 
 const Web3 = require('web3');
-const rpcURL = require('');
+const rpcURL = require('https://polygon-mumbai.g.alchemy.com/v2/H8Djcrme5eDEstvMB_ZVzOrT12RbUj0d');
 const web3URL = new Web3(rpcURL);
   const account = '0x90e63c3d53E0Ea496845b7a03ec7548B70014A91';
-const GammaTokenAbi = require('artifacts/contracts/Token.sol/GammaToken.json');
+const GammaTokenAbi = require('./artifacts/contracts/Token.sol/GammaToken.json');
 
 const address = "0x3E7B1fDF5d6ef11ec168df92df6C745FB8D7FB12";
 const contract = new web3.eth.Contract(GammaTokenAbi, address);
