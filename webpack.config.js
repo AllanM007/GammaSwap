@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   mode: "development",
-  devtool: "cheap-module-eval-source-map",
+  // devtool: "cheap-module-eval-source-map",
   entry: {
     main: path.resolve(process.cwd(), "src", "main.js")
   },
@@ -14,14 +14,14 @@ module.exports = {
     publicPath: ""
   },
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
+    // contentBase: path.join(__dirname, 'dist'),
     port: 3000,
     open: true,
   },
-	node: {
-   fs: "empty",
-	 net: "empty"
-	},
+	// node: {
+  //  fs: "empty",
+	//  net: "empty"
+	// },
   watchOptions: {
     // ignored: /node_modules/,
     aggregateTimeout: 300, // After seeing an edit, wait .3 seconds to recompile
