@@ -13,6 +13,11 @@ module.exports = {
     path: path.resolve(process.cwd(), "docs"),
     publicPath: ""
   },
+  devServer: {
+    contentBase: path.join(__dirname, 'dist'),
+    port: 3000,
+    open: true,
+  },
 	node: {
    fs: "empty",
 	 net: "empty"

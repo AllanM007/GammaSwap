@@ -21,6 +21,7 @@
   },
   "scripts": {
     "dev": "node index.js",
-    "build": "webpack"
+    "build": "webpack",
+    "serve": "./node_modules/.bin/webpack serve"
   }
 }
