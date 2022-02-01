@@ -1,3 +1,6 @@
+$.getScript("my_lovely_script.js", function() {
+  alert("Script loaded but not necessarily executed.");
+});
 requirejs(["web3"], function (web3) {
   // const web3URL = new Web3(rpcURL);
   // const account = '0x90e63c3d53E0Ea496845b7a03ec7548B70014A91';
