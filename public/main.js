@@ -1,4 +1,4 @@
-// console.log("Tebere");
+console.log("Tebere");
 
 const Web3 = require('web3');
 // const rpcURL = 'https://mainnet.infura.io/v3/'[`${process.env.INFURA_KEY}`]
