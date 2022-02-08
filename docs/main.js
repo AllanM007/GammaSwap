@@ -1,8 +1,7 @@
 console.log("Tebere");
 
 const Web3 = require('web3');
-// const rpcURL = 'https://mainnet.infura.io/v3/'[`${process.env.INFURA_KEY}`]
-const rpcURL = 'https://mainnet.infura.io/v3/fae05634594f42eb846fd4023d367efd'
+const rpcURL = 'https://mainnet.infura.io/v3/'[`${process.env.INFURA_KEY}`]
 const web3 = new Web3(rpcURL);
 const address = '0x90e63c3d53E0Ea496845b7a03ec7548B70014A91';
 
