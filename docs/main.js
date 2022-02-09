@@ -3,9 +3,12 @@ const http = require("http");
 const hostname = '127.0.0.1';
 const port = 3000;
 
+require('dotenv').config()
+console.log(process.env.INFURA_KEY)
+
 // Load web3
 const Web3 = require('web3');
-// const rpcURL = 'https://mainnet.infura.io/v3/'[`${process.env.INFURA_KEY}`]
+const rpcURL = 'https://mainnet.infura.io/v3/' + `${process.env.INFURA_KEY}`
 const web3 = new Web3(rpcURL);
 const address = '0x2A20380DcA5bC24D052acfbf79ba23e988ad0050';
 
