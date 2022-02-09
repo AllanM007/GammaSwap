@@ -17,3 +17,4 @@ web3.eth.getBalance(address, (err, wei) => {
 })
 
 console.log(contract.methods);
+console.log("RUNNING MAN!!!");
