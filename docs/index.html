@@ -39,24 +39,26 @@
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
                   <h5 class="card-title">Swap</h5>
-                  <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">From:</label>
-                    <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="0.0">
-                    <datalist id="datalistOptions">
+                  <form method="post" action="/">
+                    <div class="mb-3">
+                      <label for="exampleFormControlInput1" class="form-label">From:</label>
+                      <input class="form-control" id="swapFrom" name="swapFrom" placeholder="0.0">
+                      <!-- <datalist id="datalistOptions">
                         <option value="WMATIC">
-                        <option value="GammaToken">   
-                    </datalist>
-                  </div>
-                  <i class="fas fa-arrow-down"></i>
-                  <div class="mb-3">
-                    <label for="exampleDataList" class="form-label">To:</label>
-                    <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="0.0">
-                    <datalist id="datalistOptions">
+                        <option value="GammaToken">     
+                      </datalist> -->
+                    </div>
+                    <i class="fas fa-arrow-down"></i>
+                    <div class="mb-3">
+                      <label for="exampleDataList" class="form-label">To:</label>
+                      <input class="form-control" id="swapTo" name="swapTo" placeholder="0.0">
+                      <!-- <datalist id="datalistOptions">
                         <option value="GammaToken">
-                        <option value="WMATIC">   
-                    </datalist>
-                  </div>
-                  <a href="#" class="btn btn-primary">Swap</a>
+                        <option value="WMATIC">
+                      </datalist> -->
+                    </div>
+                    <button type="submit" class="btn btn-primary">Swap</button>
+                  </form>
                 </div>
               </div>
           </div>

@@ -1,6 +1,7 @@
 // Load http
 const http = require("http");
 const fs = require("fs");
+const { parse } = require('querystring');
 const hostname = '127.0.0.1';
 const port = 3000;
 
@@ -28,17 +29,23 @@ const privateKey2 = Buffer.from(process.env.PRIVATE_KEY_2, 'hex')
 //Create HTTP server and listen on port 3000 for requests
 const server = http.createServer((req, res) => {
 
+  if (req.method === 'POST') {
+    let body = '';
+    req.on('data', chunk => {
+      body += chunk.toString();
+    });
+    req.on('end', () => {
+      console.log(
+        parse(body)
+      );
+      res.end('ok');
+    });
+  }
+
   // get address balance
   web3.eth.getBalance(address, (err, wei) => {
     balance = web3.utils.fromWei(wei, 'ether');
-    // console.log(balance);
   })
-  
-  //log functions in contract
-  // console.log(contract.methods);
-
-  // create test accounts using web3.js
-  // console.log(web3.eth.accounts.create())
 
   //generate transfer transaction
   web3.eth.getTransactionCount(account1, (err, txCount) => {
