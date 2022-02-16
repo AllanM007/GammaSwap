@@ -35,8 +35,9 @@ const server = http.createServer((req, res) => {
       body += chunk.toString();
     });
     req.on('end', () => {
+      var postData = parse(body)
       console.log(
-        body
+        postData["swapFrom"]
       );
       res.end(body);
     });
