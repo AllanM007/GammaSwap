@@ -46,11 +46,12 @@ const server = http.createServer((req, res) => {
   // get address balance
   web3.eth.getBalance(address, (err, wei) => {
     balance = web3.utils.fromWei(wei, 'ether');
+    console.log(balance);
   })
 
   //generate transfer transaction
   web3.eth.getTransactionCount(account1, (err, txCount) => {
-    const data = postData;
+    const data = 'postData';
     
     const txObject = {
       nonce:    web3.utils.toHex(txCount),

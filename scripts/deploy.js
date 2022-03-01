@@ -21,11 +21,11 @@ async function main() {
 
   // console.log("Token deployed to:", gammaToken.address);
 
-  const GammaSwapTrade = await hre.ethers.getContractFactory("Trade");
+  const GammaSwapTrade = await hre.ethers.getContractFactory("TokenSwap");
 
-  await GammaSwapTrade.deployed();
+  const gammaSwapTrade = await GammaSwapTrade.deploy();
 
-  console.log("Contract deployed to:", GammaSwapTrade.address);
+  console.log("Contract deployed to:", gammaSwapTrade.address);
 }
 
 // We recommend this pattern to be able to use async/await everywhere
