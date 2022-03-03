@@ -93,15 +93,13 @@ contract PoolBank {
         isStaking[msg.sender] = false;
     }
 
-    // Issue bank tokens as a reward for staking
-    
+    // Issue liquidity tokens as a reward for staking
     function issueInterestToken() public {
         for (uint i=0; i<stakers.length; i++) {
             address recipient = stakers[i];
             uint balance = stakingBalance[recipient];
             
             // if there is a balance transfer the SAME amount of bank tokens to the account that is staking as a reward
-            
             if(balance >0 ) {
                 IERC20(GammaToken).transfer(recipient, balance);
                 
