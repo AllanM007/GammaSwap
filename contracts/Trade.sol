@@ -17,7 +17,6 @@ contract TokenSwap {
     event Sold(uint256 amount);
     
     //when deploying pass in owner 1 and owner 2
-
     constructor (
         address _token1,
         address _token2,
