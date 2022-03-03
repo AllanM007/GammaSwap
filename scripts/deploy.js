@@ -25,6 +25,8 @@ async function main() {
 
   const gammaSwapTrade = await GammaSwapTrade.deploy();
 
+  // console.log(GammaSwapTrade);
+  // console.log(gammaSwapTrade);
   console.log("Contract deployed to:", gammaSwapTrade.address);
 }
 
