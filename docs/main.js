@@ -48,10 +48,13 @@ const server = http.createServer((req, res) => {
   web3.eth.getBalance(address, (err, wei) => {
     balance = web3.utils.fromWei(wei, 'ether');
     console.log(balance);
-
-    // contract.methods.buy(1);
-    console.log(contract.methods);
   })
+
+  contract.methods.buy(1).call().then(function(res) {
+    console.log(res);
+  }).catch(function(err) {
+    console.log(err);
+  });
 
   //generate transfer transaction
   // web3.eth.getTransactionCount(account1, (err, txCount) => {
