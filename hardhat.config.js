@@ -1,5 +1,6 @@
 require("@nomiclabs/hardhat-waffle");
-require('dotenv').config()
+require('dotenv').config();
+require("@nomiclabs/hardhat-ethers");
 
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
@@ -14,15 +15,19 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
 
+const { ALCHEMY_URL, PRIVATE_KEY } = process.env;
+
 /**
  * @type import('hardhat/config').HardhatUserConfig
  */
 module.exports = {
   solidity: "0.8.4",
-  networks:{
-    mumbai: {
-      url: "https://polygon-mumbai.g.alchemy.com/v2/H8Djcrme5eDEstvMB_ZVzOrT12RbUj0d",
-      accounts: [process.env.PRIVATE_KEY.toString()],
+  defaultNetwork: "ropsten",
+  networks: {
+    hardhat: {},
+    ropsten: {
+      url: ALCHEMY_URL,
+      accounts: [`0x${PRIVATE_KEY}`]
     }
-  }
+  },
 };

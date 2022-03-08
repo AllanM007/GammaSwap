@@ -5,8 +5,6 @@ pragma solidity ^0.8.0;
 import "./Pool.sol";
 
 contract TokenSwap {
-
-    //create state variables
     
     IERC20 public token1;
     IERC20 public token2;
@@ -15,19 +13,6 @@ contract TokenSwap {
 
     event Bought(uint256 amount);
     event Sold(uint256 amount);
-    
-    //when deploying pass in token1, token2, owner 1 and owner 2
-    // constructor (
-    //     address _token1,
-    //     address _token2,
-    //     address _owner1,
-    //     address _owner2
-    // ) {
-    //     trader1 = _owner1;
-    //     token1 = IERC20(_token1);
-    //     trader2 = _owner2;
-    //     token2 = IERC20(_token2);
-    // }
 
     function buy(uint _amount) payable public returns(uint256) {
         require(_amount < 0, "Token amount can't be less than 0");

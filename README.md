@@ -1,14 +1,4 @@
-# GammaSwap
-
-GammaSwap is a decentralized exchange built on Polygon Mumbai Testnet. 
-
-Some of the features GammaSwap can perform are:
-
-1. Token Swapping
-2. Automated Market Maker
-3. Liquidity Pools
-
-# HardHat
+# Basic Sample Hardhat Project
 
 This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, a sample script that deploys that contract, and an example of a task implementation, which simply lists the available accounts.
 

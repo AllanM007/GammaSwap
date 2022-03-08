@@ -1,34 +1,27 @@
 {
-  "name": "hardhat-project",
+  "name": "gammaswap",
+  "version": "1.0.0",
+  "description": "decentralised exchange",
   "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "#dex",
+    "#solidity"
+  ],
+  "author": "Allan",
+  "license": "ISC",
   "devDependencies": {
-    "@nomiclabs/hardhat-ethers": "^2.0.4",
-    "@nomiclabs/hardhat-waffle": "^2.0.1",
-    "chai": "^4.3.4",
+    "@nomiclabs/hardhat-ethers": "^2.0.5",
+    "@nomiclabs/hardhat-waffle": "^2.0.3",
+    "@openzeppelin/contracts": "^4.5.0",
+    "chai": "^4.3.6",
     "ethereum-waffle": "^3.4.0",
     "ethers": "^5.5.4",
-    "friendly-errors-webpack-plugin": "^1.7.0",
-    "hardhat": "^2.8.2",
-    "webpack-dev-server": "^4.7.3"
+    "hardhat": "^2.9.1"
   },
   "dependencies": {
-    "@openzeppelin/contracts": "^4.4.2",
-    "assert": "^2.0.0",
-    "crypto-browserify": "^3.12.0",
-    "dotenv": "^14.3.2",
-    "ethereumjs-tx": "^2.1.2",
-    "html-webpack-plugin": "^5.5.0",
-    "https-browserify": "^1.0.0",
-    "os-browserify": "^0.3.0",
-    "stream-browserify": "^3.0.0",
-    "stream-http": "^3.2.0",
-    "web3": "^1.7.0",
-    "webpack": "^5.68.0",
-    "webpack-cli": "^4.9.2"
-  },
-  "scripts": {
-    "dev": "node index.js",
-    "build": "webpack",
-    "serve": "./node_modules/.bin/webpack serve"
+    "dotenv": "^16.0.0"
   }
 }

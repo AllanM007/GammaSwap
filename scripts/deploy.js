@@ -14,19 +14,19 @@ async function main() {
   // await hre.run('compile');
 
   // We get the contract to deploy
+  const GammaSwapTrade = await hre.ethers.getContractFactory("TokenSwap");
+  const trade = await GammaSwapTrade.deploy();
+
+  await trade.deployed();
+
+  console.log("Contract deployed to:", trade.address);
+
   // const GammaToken = await hre.ethers.getContractFactory("GammaToken");
   // const gammaToken = await GammaToken.deploy("1000000000000000000000000000");
 
   // await gammaToken.deployed();
 
   // console.log("Token deployed to:", gammaToken.address);
-
-  const GammaSwapTrade = await hre.ethers.getContractFactory("TokenSwap");
-
-  const gammaSwapTrade = await GammaSwapTrade.deploy();
-
-  await gammaSwapTrade.deployed();
-  console.log("Contract deployed to:", gammaSwapTrade.address);
 }
 
 // We recommend this pattern to be able to use async/await everywhere
