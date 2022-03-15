@@ -14,6 +14,7 @@ const signer = new ethers.Wallet(PRIVATE_KEY, alchemyProvider);
 const gammaSwapContract = new ethers.Contract(CONTRACT_ADDRESS, contract.abi, signer);
 
 async function main() {
+
     const message = await gammaSwapContract.buy(1);
     console.log("The message is: " + message);
 }
