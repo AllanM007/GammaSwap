@@ -4,7 +4,6 @@ const CONTRACT_ADDRESS = process.env.GammaSwapTrade_ADDRESS;
 
 const contract = require("../artifacts/contracts/Trade.sol/TokenSwap.json");
 
-// console.log(JSON.stringify(contract.abi));
 // Provider
 const alchemyProvider = new ethers.providers.AlchemyProvider(network="ropsten", API_KEY);
 
