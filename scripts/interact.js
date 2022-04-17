@@ -16,7 +16,7 @@ const gammaSwapContract = new ethers.Contract(CONTRACT_ADDRESS, contract.abi, si
 
 async function main() {
 
-    const message = await gammaSwapContract.buy(100, { gasLimit: 250000 });
+    const message = await gammaSwapContract.transfer("0x391E3567e8Da8018f592e1855A4459629c0E1d8A", 50, { gasLimit: 250000 });
     console.log("The message is: " + message);
 }
 main();
