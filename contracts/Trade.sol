@@ -9,45 +9,45 @@ import {GammaToken, ERC20} from "./Token.sol";
 contract TokenSwap {
 
     ERC20 public token;
+    mapping(address => uint256) balanceOf;
 
     constructor(){
         token = GammaToken(address(this));
     }
 
-    event Bought(uint256 amount);
-    event Sold(uint256 amount);
+    event Bought(address account, uint256 amount);
+    event Sold(address account, uint256 amount);
     event Transfer(address, uint);
 
-    // function buy(uint256 amount) payable public returns(uint256){
-    //     uint256 amountTobuy = amount;
-    //     require(amountTobuy < 0, "Tokens can be less than 0");
-    //     uint256 dexBalance = token.balanceOf(address(this));
-    //     require(address(this).balance > amountTobuy, "Insufficient token balance in pool");
+    function buy(address _account, uint256 _amount) payable public returns(uint256){
 
-    //     token.transfer(msg.sender, amountTobuy);
-    //     emit Bought(amountTobuy);
+        uint256 dexBalance = token.balanceOf(address(this));
+        require(address(this).balance > _amount, "Insufficient token balance in pool");
 
-    //     return dexBalance;
-    // }
+        token.transfer(_account, _amount);
+        emit Bought(_account, _amount);
 
-    function transfer(address sender, uint numTokens) public returns (bool) {
-
-        uint traderBalance = address(sender).balance;
-        require(numTokens < address(token).balance, "dexBalance insufficient");
-        traderBalance += numTokens;
-        
-        // token.transfer(sender, numTokens);
-        emit Transfer(sender, numTokens);
-
-        return true;
+        return dexBalance;
     }
 
-    function sell(uint amountTosell) payable public returns(uint256) {
-        require(amountTosell > 0, "Amount can't be 0");
-        require(msg.sender.balance > amountTosell);
+    // function transfer(address sender, uint numTokens) public returns (bool) {
 
-        token.transfer(address(this), amountTosell);
-        emit Sold(amountTosell);
+    //     uint traderBalance = address(sender).balance;
+    //     require(numTokens < address(token).balance, "dexBalance insufficient");
+    //     traderBalance += numTokens;
+        
+    //     // token.transfer(sender, numTokens);
+    //     emit Transfer(sender, numTokens);
+
+    //     return true;
+    // }
+
+    function sell(address payable _account, uint amountTosell) payable public returns(uint256) {
+        
+        require(balanceOf[_account] > amountTosell, "Token balance not sufficient");
+
+        _account.transfer(amountTosell);
+        emit Sold(_account, amountTosell);
 
         uint256 dexBalance = token.balanceOf(address(this));
 
