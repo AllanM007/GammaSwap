@@ -9,10 +9,11 @@ import {GammaToken, ERC20} from "./Token.sol";
 contract TokenSwap {
 
     ERC20 public token;
+    address tokenAddr;
     mapping(address => uint256) balanceOf;
 
     constructor(){
-        token = GammaToken(address(this));
+        token = GammaToken(address(0xF6d09bA980C99fFf8e6ffe740139AE36495Bb31c));
     }
 
     event Bought(address account, uint256 amount);
@@ -21,8 +22,8 @@ contract TokenSwap {
 
     function buy(address _account, uint256 _amount) payable public returns(uint256){
 
-        uint256 dexBalance = token.balanceOf(address(this));
-        require(address(this).balance > _amount, "Insufficient token balance in pool");
+        uint256 dexBalance = balanceOf[tokenAddr];
+        require(dexBalance > _amount, "Insufficient token balance");
 
         token.transfer(_account, _amount);
         emit Bought(_account, _amount);
