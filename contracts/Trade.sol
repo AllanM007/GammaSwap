@@ -20,13 +20,13 @@ contract TokenSwap {
     event Sold(address account, uint256 amount);
     event Transfer(address, uint);
 
-    function buy(address _account, uint256 _amount) payable public returns(uint256){
+    function buy(uint256 _amount) payable public returns(uint256){
 
-        uint256 dexBalance = balanceOf[tokenAddr];
+        uint256 dexBalance = token.balanceOf(address(this));
         require(dexBalance > _amount, "Insufficient token balance");
 
-        token.transfer(_account, _amount);
-        emit Bought(_account, _amount);
+        token.transfer(msg.sender, _amount);
+        emit Bought(msg.sender, _amount);
 
         return dexBalance;
     }

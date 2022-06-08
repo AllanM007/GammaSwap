@@ -18,27 +18,45 @@ const signer = new ethers.Wallet(PRIVATE_KEY, alchemyProvider);
 console.log(signer.getGasPrice());
 
 // Contract
-const gammaSwapContract = new ethers.Contract("0xc8679C09296fCFa2C55aB129b6BD154937771dC0", contract.abi, signer);
+const gammaSwapContract = new ethers.Contract("0x51a9092F31FBF5D9351a111FB252ec944611Ce9B", contract.abi, signer);
 const gammaTokenContract = new ethers.Contract(process.env.GammaToken_ADDRESS, GammaTokenContractABI.abi, signer );
 
 async function main() {
+    
+    // const signedTransaction = signer.signTransaction(tx, METAMASK_PRIVATE_KEY)
 
-    // Get Wallet Address Nonce
-    const nonce = await alchemyProvider.getTransactionCount(METAMASK_ADDRESS, 'latest');
+    const recipientAddr = '0x391E3567e8Da8018f592e1855A4459629c0E1d8A';
 
     try {        
-        const message = await gammaSwapContract.buy("0x391E3567e8Da8018f592e1855A4459629c0E1d8A", 20, { gasLimit: 250000 });
-        const reciept = await message.wait();
-        console.log("The message is: " + reciept);
+        const message = await gammaSwapContract.buy("20", { gasLimit: 250000 });
+        await message.wait();
+
+        //contract.coins(1).then(res => console.log(res)).catch(err=> console.log("error", err));
+        console.log(`The message is: ${message.toString()}`);
+
+        // Get Wallet Address Nonce
+        // const nonce = await alchemyProvider.getTransactionCount(METAMASK_ADDRESS, 'latest');
+        
+        // const tx = {
+        //     'to': "0x391E3567e8Da8018f592e1855A4459629c0E1d8A",
+        //     'nonce': nonce,
+        //     'gasLimit': 500000,
+        //     value: ethers.utils.parseEther('0.0000000001'),
+        // }
+
+        // const createReciept = await signer.sendTransaction(tx);
+        // await createReciept.wait();
+        // console.log(`The transaction hash is ${createReciept.hash}`);
     } catch (error) {
         console.log(error);
     }
 
     // try {
-    //     const getFunctions = gammaTokenContract.functions;
-    //     console.log(getFunctions);
+    //     const transferGamma = gammaTokenContract.functions.transfer('0x391E3567e8Da8018f592e1855A4459629c0E1d8A', 20, { gasLimit: 250000 });
+    //     const reciept = transferGamma.wait();
+    //     console.log(reciept);
     // } catch (error) {
-        
+    //     console.log(error);
     // }
 }
 main();
