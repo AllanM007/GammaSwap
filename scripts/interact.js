@@ -5,7 +5,7 @@ const METAMASK_ADDRESS = process.env.ETH_DEV_ACCOUNT_ADDRESS
 const CONTRACT_ADDRESS = process.env.GammaSwapTrade_ADDRESS;
 
 const { json } = require("hardhat/internal/core/params/argumentTypes");
-const { ethers } = require("ethers");
+const { ethers} = require("ethers");
 const contract = require("../artifacts/contracts/Trade.sol/TokenSwap.json");
 const GammaTokenContractABI = require('../artifacts/contracts/Token.sol/GammaToken.json'); 
 
@@ -26,9 +26,12 @@ async function main() {
     // const signedTransaction = signer.signTransaction(tx, METAMASK_PRIVATE_KEY)
 
     const recipientAddr = '0x391E3567e8Da8018f592e1855A4459629c0E1d8A';
+    
+    const buyNum = 100000;
+    const fmtInt = ethers.utils.parseUnits(buyNum.toString(), 18);
 
     try {        
-        const message = await gammaSwapContract.buy("20", { gasLimit: 250000 });
+        const message = await gammaSwapContract.buy( fmtInt, { gasLimit: 250000 });
         await message.wait();
 
         //contract.coins(1).then(res => console.log(res)).catch(err=> console.log("error", err));

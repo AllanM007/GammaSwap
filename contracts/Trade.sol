@@ -43,14 +43,15 @@ contract TokenSwap {
     //     return true;
     // }
 
-    function sell(address payable _account, uint amountTosell) payable public returns(uint256) {
+    function sell(uint amountTosell) payable public returns(uint256) {
         
-        require(balanceOf[_account] > amountTosell, "Token balance not sufficient");
-
-        _account.transfer(amountTosell);
-        emit Sold(_account, amountTosell);
-
         uint256 dexBalance = token.balanceOf(address(this));
+        address payable _accountAddress = payable(msg.sender);
+
+        require(token.balanceOf(_accountAddress) > amountTosell, "Token balance not sufficient");
+
+        _accountAddress.transfer(amountTosell);
+        emit Sold(msg.sender, amountTosell);
 
         return dexBalance;
     }
