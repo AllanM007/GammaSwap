@@ -31,28 +31,18 @@ contract TokenSwap {
         return dexBalance;
     }
 
-    // function transfer(address sender, uint numTokens) public returns (bool) {
-
-    //     uint traderBalance = address(sender).balance;
-    //     require(numTokens < address(token).balance, "dexBalance insufficient");
-    //     traderBalance += numTokens;
+    function sell(uint256 _amountTosell) public returns(bool) {
         
-    //     // token.transfer(sender, numTokens);
-    //     emit Transfer(sender, numTokens);
-
-    //     return true;
-    // }
-
-    function sell(uint amountTosell) payable public returns(uint256) {
+        token.approve(address(this), _amountTosell);
         
-        uint256 dexBalance = token.balanceOf(address(this));
-        address payable _accountAddress = payable(msg.sender);
+        // uint256 dexBalance = token.balanceOf(address(this));
+        uint256 _allowance = token.allowance(msg.sender, address(this));
 
-        require(token.balanceOf(_accountAddress) > amountTosell, "Token balance not sufficient");
+        require(_allowance >= _amountTosell, "Amount not sufficient");
 
-        _accountAddress.transfer(amountTosell);
-        emit Sold(msg.sender, amountTosell);
+        token.transferFrom(msg.sender, address(this), _amountTosell);
+        emit Sold(address(this), _amountTosell);
 
-        return dexBalance;
+        return true;
     }
 }

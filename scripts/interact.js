@@ -18,7 +18,7 @@ const signer = new ethers.Wallet(PRIVATE_KEY, alchemyProvider);
 console.log(signer.getGasPrice());
 
 // Contract
-const gammaSwapContract = new ethers.Contract("0x51a9092F31FBF5D9351a111FB252ec944611Ce9B", contract.abi, signer);
+const gammaSwapContract = new ethers.Contract("0x86D00C262ed816b329ADC799bB1EFF01E38d5324", contract.abi, signer);
 const gammaTokenContract = new ethers.Contract(process.env.GammaToken_ADDRESS, GammaTokenContractABI.abi, signer );
 
 async function main() {
@@ -27,11 +27,12 @@ async function main() {
 
     const recipientAddr = '0x391E3567e8Da8018f592e1855A4459629c0E1d8A';
     
-    const buyNum = 100000;
+    const buyNum = 49899999;
     const fmtInt = ethers.utils.parseUnits(buyNum.toString(), 18);
 
-    try {        
-        const message = await gammaSwapContract.buy( fmtInt, { gasLimit: 250000 });
+    try {
+        
+        const message = await gammaSwapContract.sell( 20, { gasLimit: 250000 });
         await message.wait();
 
         //contract.coins(1).then(res => console.log(res)).catch(err=> console.log("error", err));
