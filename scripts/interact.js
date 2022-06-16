@@ -21,7 +21,7 @@ console.log(signer.getGasPrice());
 const gammaSwapContract = new ethers.Contract("0x86D00C262ed816b329ADC799bB1EFF01E38d5324", contract.abi, signer);
 const gammaTokenContract = new ethers.Contract(process.env.GammaToken_ADDRESS, GammaTokenContractABI.abi, signer );
 
-async function main() {
+async function sellToken() {
     
     // const signedTransaction = signer.signTransaction(tx, METAMASK_PRIVATE_KEY)
 
@@ -32,35 +32,19 @@ async function main() {
 
     try {
         
-        const message = await gammaSwapContract.sell( 20, { gasLimit: 250000 });
-        await message.wait();
+        const approv = await gammaTokenContract.approve('0x86D00C262ed816b329ADC799bB1EFF01E38d5324', 20);
+        return approvalConfirmation = await approv.wait();
+
+        // const message = await gammaSwapContract.sell( 20, { gasLimit: 250000 });
+        // await message.wait();
 
         //contract.coins(1).then(res => console.log(res)).catch(err=> console.log("error", err));
-        console.log(`The message is: ${message.toString()}`);
-
-        // Get Wallet Address Nonce
-        // const nonce = await alchemyProvider.getTransactionCount(METAMASK_ADDRESS, 'latest');
-        
-        // const tx = {
-        //     'to': "0x391E3567e8Da8018f592e1855A4459629c0E1d8A",
-        //     'nonce': nonce,
-        //     'gasLimit': 500000,
-        //     value: ethers.utils.parseEther('0.0000000001'),
-        // }
-
-        // const createReciept = await signer.sendTransaction(tx);
-        // await createReciept.wait();
-        // console.log(`The transaction hash is ${createReciept.hash}`);
     } catch (error) {
         console.log(error);
     }
-
-    // try {
-    //     const transferGamma = gammaTokenContract.functions.transfer('0x391E3567e8Da8018f592e1855A4459629c0E1d8A', 20, { gasLimit: 250000 });
-    //     const reciept = transferGamma.wait();
-    //     console.log(reciept);
-    // } catch (error) {
-    //     console.log(error);
-    // }
 }
-main();
+
+sellToken().then(data => {
+    console.log(data)
+    process.exit();
+}).catch(err => console.error(err));
