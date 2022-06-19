@@ -23,8 +23,6 @@ const gammaTokenContract = new ethers.Contract(process.env.GammaToken_ADDRESS, G
 
 async function sellToken() {
     
-    // const signedTransaction = signer.signTransaction(tx, METAMASK_PRIVATE_KEY)
-
     const recipientAddr = '0x391E3567e8Da8018f592e1855A4459629c0E1d8A';
     
     const buyNum = 49899999;
@@ -33,10 +31,16 @@ async function sellToken() {
     try {
         
         const approv = await gammaTokenContract.approve('0x86D00C262ed816b329ADC799bB1EFF01E38d5324', 20);
-        return approvalConfirmation = await approv.wait();
+        const approvalConfirmation = await approv.wait();
 
-        // const message = await gammaSwapContract.sell( 20, { gasLimit: 250000 });
-        // await message.wait();
+        if (approvalConfirmation['']) {
+            const message = await gammaSwapContract.sell( 20, { gasLimit: 250000 });
+            await message.wait();
+            
+            console.log(`The response is${message.toString()}`);   
+        } else {
+            
+        }
 
         //contract.coins(1).then(res => console.log(res)).catch(err=> console.log("error", err));
     } catch (error) {
