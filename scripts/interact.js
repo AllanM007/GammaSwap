@@ -47,14 +47,10 @@ async function sellToken() {
             console.log(`Token transfer approval rejected`);
         }
 
-        //contract.coins(1).then(res => console.log(res)).catch(err=> console.log("error", err));
+        //gammaContract.buy(1).then(res => console.log(res)).catch(err=> console.log("error", err));
     } catch (error) {
         console.log(error);
     }
 }
 
-sellToken()
-// .then(data => {
-//     console.log(data)
-//     process.exit();
-// }).catch(err => console.error(err));
+sellToken();
