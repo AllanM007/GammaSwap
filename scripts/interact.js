@@ -33,13 +33,18 @@ async function sellToken() {
         const approv = await gammaTokenContract.approve('0x86D00C262ed816b329ADC799bB1EFF01E38d5324', 20);
         const approvalConfirmation = await approv.wait();
 
-        if (approvalConfirmation['']) {
-            const message = await gammaSwapContract.sell( 20, { gasLimit: 250000 });
-            await message.wait();
+        if (approvalConfirmation.status == 1) {
+            const sellTransaction = await gammaSwapContract.sell( 20, { gasLimit: 250000 });
+            const sellLog = await sellTransaction.wait();
+
+            const sellObject = sellLog.events.find(event => event.event === 'Sold');
+
+            const [to, value] = sellObject.args;
             
-            console.log(`The response is${message.toString()}`);   
+            console.log(to, value.toString());
+              
         } else {
-            
+            console.log(`Token transfer approval rejected`);
         }
 
         //contract.coins(1).then(res => console.log(res)).catch(err=> console.log("error", err));
@@ -48,7 +53,8 @@ async function sellToken() {
     }
 }
 
-sellToken().then(data => {
-    console.log(data)
-    process.exit();
-}).catch(err => console.error(err));
+sellToken()
+// .then(data => {
+//     console.log(data)
+//     process.exit();
+// }).catch(err => console.error(err));
