@@ -14,12 +14,12 @@ async function main() {
   // await hre.run('compile');
 
   // We get the contract to deploy
-  const GammaSwapTrade = await hre.ethers.getContractFactory("TokenSwap");
-  const trade = await GammaSwapTrade.deploy();
+  const GammaSwapPool = await hre.ethers.getContractFactory("PoolBank");
+  const pool = await GammaSwapPool.deploy();
 
-  await trade.deployed();
+  await pool.deployed();
 
-  console.log("Contract deployed to:", trade.address);
+  console.log("Contract deployed to:", pool.address);
 
   // const GammaToken = await hre.ethers.getContractFactory("GammaToken");
   // const gammaToken = await GammaToken.deploy("1000000000000000000000000000");
