@@ -42,8 +42,6 @@ contract PoolBank {
     constructor() {
         LPToken = GammaLPToken(address(0x4155c2E551019C2765D613018c48cf585A375Ed9));
         token = GammaToken(address(0xF6d09bA980C99fFf8e6ffe740139AE36495Bb31c));
-        // GammaToken = 0x3e7b1fdf5d6ef11ec168df92df6c745fb8d7fb12;
-        // GammaToken = 0x3E7B1fDF5d6ef11ec168df92df6C745FB8D7FB12;
     }
 
     // allow user to stake GammaToken in liquidity pool contract
@@ -87,7 +85,7 @@ contract PoolBank {
         require(balance > new_staking_balance, "Insufficient token balance!");
 
         // transfer gamma lp tokens from this contract to the msg.sender
-        token.transfer(msg.sender, _amount);
+        LPToken.transfer(msg.sender, _amount);
     
         // reset staking balance map to new balance
         stakingBalance[msg.sender] = balance;
@@ -105,7 +103,7 @@ contract PoolBank {
         require(balance > 0, "staking balance can not be 0");
     
         // transfer gamma lp tokens out of this contract to the msg.sender
-        token.transfer(msg.sender, balance);
+        LPToken.transfer(msg.sender, balance);
     
         // reset staking balance map to 0
         stakingBalance[msg.sender] = 0;

@@ -18,14 +18,14 @@ const signer = new ethers.Wallet(PRIVATE_KEY, alchemyProvider);
 console.log(signer.getGasPrice());
 
 // Contract
-const gammaPoolContract = new ethers.Contract("0x587599Cc7603e43C7021cC95552797e6a0e27FA4", contract.abi, signer);
+const gammaPoolContract = new ethers.Contract("0x508D5f7e65A98Be774Ac3499c892b122d84BAaf6", contract.abi, signer);
 const gammaLPTokenContract = new ethers.Contract(process.env.GammaLPToken_ADDRESS, GammaLPTokenContractABI.abi, signer );
 
 async function stakeToken() {
 
     try {
 
-        const approv = await gammaLPTokenContract.approve('0x587599Cc7603e43C7021cC95552797e6a0e27FA4', 20);
+        const approv = await gammaLPTokenContract.approve('0x508D5f7e65A98Be774Ac3499c892b122d84BAaf6', 20);
         const approvalConfirmation = await approv.wait();
 
         if (approvalConfirmation.status == 1) {
@@ -51,7 +51,7 @@ async function withdrawToken() {
 
     try {
 
-        const withdrawTransaction = await gammaPoolContract.stakeTokens(20, { gasLimit: 250000 });
+        const withdrawTransaction = await gammaPoolContract.withdrawTokens(5, { gasLimit: 250000 });
         const withdrawLog = await withdrawTransaction.wait();
             
         const withdrawObject = withdrawLog.events.find(event => event.event === 'WithdrawTokens');
@@ -83,4 +83,4 @@ async function unstakeToken() {
     }
 }
 
-stakeToken();
+withdrawToken();
