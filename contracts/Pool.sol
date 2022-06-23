@@ -48,13 +48,13 @@ contract PoolBank {
     function stakeTokens(uint _amount) public returns (bool) {
 
         // assign token allowance a verifiable variable
-        uint256 transAllowance = LPToken.allowance(msg.sender, address(this));
+        uint256 transAllowance = token.allowance(msg.sender, address(this));
         
         // check if pool contract has enough allowance to send lp token
         require(_amount >= transAllowance, "token allowance not enough");
         
         // Send staker address lptokens matching staking token amount
-        LPToken.transferFrom(msg.sender, address(this), _amount);
+        token.transferFrom(msg.sender, address(this), _amount);
 
         // Update the staking balance in map
         stakingBalance[msg.sender] = stakingBalance[msg.sender] + _amount;
@@ -85,12 +85,12 @@ contract PoolBank {
         require(balance > new_staking_balance, "Insufficient token balance!");
 
         // transfer gamma lp tokens from this contract to the msg.sender
-        LPToken.transfer(msg.sender, _amount);
+        token.transfer(msg.sender, _amount);
     
         // reset staking balance map to new balance
         stakingBalance[msg.sender] = balance;
 
-        emit UnstakeTokens(msg.sender, _amount);
+        emit WithdrawTokens(msg.sender, _amount);
 
     }
 
@@ -103,7 +103,7 @@ contract PoolBank {
         require(balance > 0, "staking balance can not be 0");
     
         // transfer gamma lp tokens out of this contract to the msg.sender
-        LPToken.transfer(msg.sender, balance);
+        token.transfer(msg.sender, balance);
     
         // reset staking balance map to 0
         stakingBalance[msg.sender] = 0;
@@ -116,13 +116,13 @@ contract PoolBank {
         return true;
     }
 
-    // Issue liquidity tokens per block as a reward for staking
+    // Issue liquidity tokens per week as a reward for staking
     function issueInterestToken() public {
         for (uint i=0; i<stakers.length; i++) {
             address recipient = stakers[i];
             uint balance = stakingBalance[recipient];
 
-            uint rewardAmount = 1;
+            uint rewardAmount = balance * 1;
             
             // if there is a balance transfer the SAME amount of bank tokens to the account that is staking as a reward
             if(balance > 0 ) {
