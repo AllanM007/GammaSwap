@@ -83,4 +83,20 @@ async function unstakeToken() {
     }
 }
 
-withdrawToken();
+let timerId = setInterval(func|code, [delay]);
+
+async function issueInterestToken() {
+
+    try {
+
+        const issueInterestToken = await gammaPoolContract.issueInterestToken({ gasLimit: 250000 });
+        const issueInterestTokenLog = await issueInterestToken.wait();
+            
+        console.log(issueInterestTokenLog.toString());             
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+setInterval(issueInterestToken, 604800000);
